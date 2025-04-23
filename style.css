@@ -2,8 +2,6 @@
 
 #show-cards-btn, #hide-cards-btn { /* Target both buttons */
     margin-bottom: 10px; /* Add some space below the button */
-    /* You might want different styling */
-    /* background-color: #28a745; */ /* Example: Green button */
 }
 
 #card-list-placeholder {
@@ -15,8 +13,6 @@
 }
 
 
-/* --- Make sure the rest of your existing styles are still present --- */
-/* Basic Dark Theme */
 body {
     font-family: sans-serif;
     margin: 20px;
@@ -120,7 +116,7 @@ hr {
     display: flex; /* Use flexbox to align text and button */
     justify-content: space-between; /* Push button to the right */
     align-items: center; /* Vertically center items */
-    background-color: #333; /* Dark list item background */
+    background-color: #333;
     margin-bottom: 5px;
     padding: 8px;
     border-radius: 3px;
@@ -128,21 +124,21 @@ hr {
 }
 
 #card-list .card-text {
-    flex-grow: 1; /* Allow text to take available space */
-    margin-right: 10px; /* Space between text and button */
+    flex-grow: 1;
+    margin-right: 10px;
 }
 
 #card-list .delete-card-btn {
-    padding: 3px 8px; /* Smaller padding for inline button */
+    padding: 3px 8px;
     font-size: 0.8em;
-    flex-shrink: 0; /* Prevent button from shrinking */
+    flex-shrink: 0;
 }
 
 /* General Delete Button Styling */
 .delete-btn {
     background-color: #dc3545; /* Red color */
     border-color: #dc3545;
-    margin-left: 5px; /* Add some space */
+    margin-left: 5px;
 }
 
 .delete-btn:hover {
@@ -159,7 +155,7 @@ hr {
     margin-top: 15px;
     padding: 10px;
     border-radius: 3px;
-    min-height: 1.2em; /* Prevent layout shift */
+    min-height: 1.2em;
     border: 1px solid transparent;
 }
 
@@ -176,27 +172,24 @@ hr {
 }
 
 /* Review Card Styling */
-.card { /* This targets the #review-card-display div */
-    background-color: #2d2d30; /* Dark card background */
+.card { 
+    background-color: #2d2d30;
     border: 1px solid #555;
     padding: 15px;
     margin-bottom: 10px;
-    min-height: 70px; /* Increased min-height slightly */
+    min-height: 70px;
     border-radius: 4px;
-    font-size: 1.5em; /* <<< INCREASED FONT SIZE (adjust as needed) */
-    line-height: 1.4; /* Adjust line height for readability */
-    color: #ccc; /* Slightly dimmer text on card */
+    font-size: 1.5em;
+    line-height: 1.4;
+    color: #ccc;
 }
 #review-back {
     margin-top: 10px;
-    border-top: 1px dashed #555; /* Darker dashed line */
+    border-top: 1px dashed #555;
     padding-top: 10px;
-    color: #d4d4d4; /* Brighter text for answer */
-    /* Font size is inherited from .card */
+    color: #d4d4d4; 
 }
 
-/* Ensure specific front/back divs don't override font size unless intended */
 #review-front, #review-back {
-    /* Add specific styles here if needed, otherwise they inherit from .card */
 }
 

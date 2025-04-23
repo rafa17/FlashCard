@@ -37,8 +37,6 @@ function createWindow() {
 
 // Handle request to get initial data
 ipcMain.handle('get-data', async (event) => {
-    // Returns the currently loaded application data (cards and collections)
-    // Defensively load data if it hasn't been loaded yet (shouldn't happen normally)
     if (appData === null) {
         console.warn("get-data called before data was loaded! Loading now.");
         appData = dataManager.loadData();
@@ -55,9 +53,6 @@ ipcMain.handle('create-collection', async (event, name) => {
         return { success: false, message: 'Invalid collection name provided.' };
     }
 
-    // --- Sanitization Step ---
-    // Remove characters that look like HTML tags using a simple regex
-    // and trim whitespace again.
     const sanitizedName = name.replace(/<[^>]*>/g, '').trim();
     console.log(`Sanitized collection name: "${sanitizedName}"`); // Log the cleaned name
 
@@ -65,7 +60,6 @@ ipcMain.handle('create-collection', async (event, name) => {
     if (sanitizedName === '') {
          return { success: false, message: 'Collection name cannot be empty or contain only HTML tags.' };
     }
-    // --- End Sanitization Step ---
 
     // Check if the *sanitized* name already exists in the collections
     const nameExists = Object.values(appData.collections).some(col => col.name === sanitizedName);
@@ -79,8 +73,8 @@ ipcMain.handle('create-collection', async (event, name) => {
 
     // Add the new collection to the application data, using the sanitized name
     appData.collections[collectionId] = {
-        name: sanitizedName, // *** Store the sanitized name ***
-        cardIds: []          // Initialize with an empty array of card IDs
+        name: sanitizedName,
+        cardIds: []         
     };
 
     // Attempt to save the updated application data to the JSON file
@@ -102,23 +96,15 @@ ipcMain.handle('create-collection', async (event, name) => {
     if (!collectionId || !front || !back || !appData.collections[collectionId]) {
         return { success: false, message: 'Invalid data or collection ID.'};
     }
-    // Generate a unique ID for the new card
     const cardId = dataManager.generateId();
-    // Add the card data to the main cards object
     appData.cards[cardId] = { front, back };
-    // Add the new card's ID to the specified collection's list of card IDs
     appData.collections[collectionId].cardIds.push(cardId);
-    // Save the updated application data
-    const saved = dataManager.saveData(appData); // Save immediately
-    // Return the result
+    const saved = dataManager.saveData(appData);
     return { success: saved, cardId: cardId, message: saved ? 'Card added.' : 'Failed to save data.' };
  });
 
- // Handle request to save (e.g., triggered explicitly by a save button if added)
  ipcMain.handle('save-data', async (event) => {
-     // Save the current application data state
      const saved = dataManager.saveData(appData);
-     // Return success status
      return { success: saved };
  });
 
@@ -133,26 +119,19 @@ ipcMain.handle('create-collection', async (event, name) => {
     // Delete the collection entry
     delete appData.collections[collectionId];
 
-    // Note: Cards associated only with this collection remain in appData.cards
-    // unless explicitly removed here or by the delete-card handler.
-
     // Save the changes
     const saved = dataManager.saveData(appData);
     console.log(`Save attempt result after deleting collection: ${saved}`);
 
     if (saved) {
         console.log(`Collection "${collectionName}" deleted successfully. Relaunching app...`);
-        // --- Restart Logic ---
-        app.relaunch(); // Relaunch the application
-        app.exit(0);    // Exit the current instance cleanly
-        // --- End Restart Logic ---
-        // The return below might not execute if exit is fast enough, but good practice
+        app.relaunch();
+        app.exit(0);    
         return {
             success: true,
             message: `Collection "${collectionName}" deleted. Restarting application...`
         };
     } else {
-        // If saving failed, don't restart, report error
         return {
             success: false,
             message: 'Failed to save data after deleting collection. App not restarted.'

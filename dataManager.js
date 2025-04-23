@@ -2,22 +2,14 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 
-// Remove the hardcoded path definition from here
-
-// Keep track of the path initialized by the main process
-let DATA_FILE_PATH = ''; // Will be set by initDataManager
+let DATA_FILE_PATH = '';
 
 const DEFAULT_DATA = { cards: {}, collections: {} };
 
-/**
- * Initializes the data manager with the correct path for flashcards.json.
- * This MUST be called from the main process after 'app' is ready.
- * @param {string} userDataPath - The path provided by app.getPath('userData')
- */
 function initDataManager(userDataPath) {
     // Define the path for flashcards.json within the app's user data folder
     DATA_FILE_PATH = path.join(userDataPath, 'flashcards.json');
-    console.log(`Data file path set to: ${DATA_FILE_PATH}`); // Log the path being used
+    console.log(`Data file path set to: ${DATA_FILE_PATH}`);
 
     // Ensure the directory exists (important for first run)
     try {
@@ -37,11 +29,8 @@ function generateId() {
 }
 
 function loadData() {
-    // Ensure the path has been initialized
     if (!DATA_FILE_PATH) {
         console.error("Data manager not initialized. Call initDataManager first.");
-        // You might want to throw an error or return default data here
-        // depending on how you want to handle this edge case.
         return { ...DEFAULT_DATA };
     }
 
@@ -75,16 +64,15 @@ function saveData(data) {
     try {
         const dataJSON = JSON.stringify(data, null, 2);
         fs.writeFileSync(DATA_FILE_PATH, dataJSON, 'utf-8');
-        return true; // Indicate success
+        return true;
     } catch (e) {
         console.error(`Error saving data to ${DATA_FILE_PATH}:`, e.message);
-        return false; // Indicate failure
+        return false;
     }
 }
 
-// Export the functions needed by the main process, including the initializer
 module.exports = {
-    initDataManager, // Export the initializer
+    initDataManager,
     loadData,
     saveData,
     generateId
