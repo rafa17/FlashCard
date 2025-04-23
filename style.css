@@ -1,0 +1,202 @@
+/* Add this to your existing style.css */
+
+#show-cards-btn, #hide-cards-btn { /* Target both buttons */
+    margin-bottom: 10px; /* Add some space below the button */
+    /* You might want different styling */
+    /* background-color: #28a745; */ /* Example: Green button */
+}
+
+#card-list-placeholder {
+    padding: 10px;
+    background-color: #2d2d30; /* Match card background */
+    border: 1px solid #444;
+    border-radius: 3px;
+    color: #aaa; /* Dim text */
+}
+
+
+/* --- Make sure the rest of your existing styles are still present --- */
+/* Basic Dark Theme */
+body {
+    font-family: sans-serif;
+    margin: 20px;
+    background-color: #1e1e1e; /* Dark background */
+    color: #d4d4d4; /* Light text */
+}
+
+h1, h2, h3 {
+    color: #d4d4d4; /* Light headings */
+    border-bottom: 1px solid #444; /* Optional separator */
+    padding-bottom: 5px;
+}
+
+.container {
+    display: flex;
+    gap: 20px;
+}
+
+.collections-panel, .cards-panel {
+    background-color: #252526; /* Slightly lighter dark for panels */
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #333; /* Subtle border */
+}
+
+.collections-panel {
+    flex: 1;
+}
+
+.cards-panel {
+    flex: 2;
+}
+
+/* Select boxes and inputs */
+#collection-select, .collections-panel div input[type="text"], .cards-panel input[type="text"] {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #555; /* Darker border */
+    border-radius: 3px;
+    background-color: #3c3c3c; /* Dark input background */
+    color: #d4d4d4; /* Light text in input */
+}
+
+#collection-select {
+     width: 100%;
+     min-height: 100px;
+}
+.collections-panel div input[type="text"] {
+   width: calc(100% - 150px); /* Adjust width based on button sizes */
+   margin-right: 5px;
+}
+.cards-panel input[type="text"] {
+    width: calc(50% - 27px); /* Adjust width for two inputs + button */
+    margin-right: 5px;
+}
+
+
+/* Make select options readable */
+#collection-select option {
+    background-color: #3c3c3c;
+    color: #d4d4d4;
+    padding: 5px;
+}
+
+
+button {
+    padding: 8px 15px;
+    background-color: #0e639c; /* Darker blue for buttons */
+    color: white;
+    border: 1px solid #1e7cbb; /* Subtle border */
+    border-radius: 3px;
+    cursor: pointer;
+    margin-right: 5px;
+    margin-bottom: 5px; /* Add bottom margin for wrapping */
+}
+
+button:hover {
+    background-color: #1177cc; /* Slightly lighter blue on hover */
+}
+.collections-panel div {
+    display: flex; /* Use flex for alignment */
+    flex-wrap: wrap; /* Allow wrapping */
+    align-items: center;
+    margin-top: 10px;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-color: #444; /* Darker separator */
+    margin: 20px 0;
+}
+
+#card-list { /* Target the UL directly */
+    list-style: none;
+    padding: 0;
+    margin: 0 0 10px 0; /* Remove default ul margin, add bottom margin */
+}
+
+#card-list li {
+    display: flex; /* Use flexbox to align text and button */
+    justify-content: space-between; /* Push button to the right */
+    align-items: center; /* Vertically center items */
+    background-color: #333; /* Dark list item background */
+    margin-bottom: 5px;
+    padding: 8px;
+    border-radius: 3px;
+    border: 1px solid #444;
+}
+
+#card-list .card-text {
+    flex-grow: 1; /* Allow text to take available space */
+    margin-right: 10px; /* Space between text and button */
+}
+
+#card-list .delete-card-btn {
+    padding: 3px 8px; /* Smaller padding for inline button */
+    font-size: 0.8em;
+    flex-shrink: 0; /* Prevent button from shrinking */
+}
+
+/* General Delete Button Styling */
+.delete-btn {
+    background-color: #dc3545; /* Red color */
+    border-color: #dc3545;
+    margin-left: 5px; /* Add some space */
+}
+
+.delete-btn:hover {
+    background-color: #c82333; /* Darker red on hover */
+    border-color: #bd2130;
+}
+#delete-collection-btn {
+    margin-top: 5px;
+}
+
+
+/* Status Messages */
+#status-message {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 3px;
+    min-height: 1.2em; /* Prevent layout shift */
+    border: 1px solid transparent;
+}
+
+.status-success {
+    background-color: #1a4d2e; /* Dark green success */
+    color: #a6d8b8;
+    border-color: #2a6e44;
+}
+
+.status-error {
+    background-color: #5f2120; /* Dark red error */
+    color: #f5c6cb;
+    border-color: #8b3a38;
+}
+
+/* Review Card Styling */
+.card { /* This targets the #review-card-display div */
+    background-color: #2d2d30; /* Dark card background */
+    border: 1px solid #555;
+    padding: 15px;
+    margin-bottom: 10px;
+    min-height: 70px; /* Increased min-height slightly */
+    border-radius: 4px;
+    font-size: 1.5em; /* <<< INCREASED FONT SIZE (adjust as needed) */
+    line-height: 1.4; /* Adjust line height for readability */
+    color: #ccc; /* Slightly dimmer text on card */
+}
+#review-back {
+    margin-top: 10px;
+    border-top: 1px dashed #555; /* Darker dashed line */
+    padding-top: 10px;
+    color: #d4d4d4; /* Brighter text for answer */
+    /* Font size is inherited from .card */
+}
+
+/* Ensure specific front/back divs don't override font size unless intended */
+#review-front, #review-back {
+    /* Add specific styles here if needed, otherwise they inherit from .card */
+}
+

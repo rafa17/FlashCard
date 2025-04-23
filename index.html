@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Flashcard App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Flashcard App</h1>
+
+    <div class="container">
+        <div class="collections-panel">
+            <h2>Collections</h2>
+            <select id="collection-select" size="5"></select>
+            <div>
+                <input type="text" id="new-collection-name" placeholder="New collection name">
+                <button id="add-collection-btn">Add Collection</button>
+                <button id="delete-collection-btn" class="delete-btn">Delete Selected Collection</button>
+            </div>
+        </div>
+
+        <div class="cards-panel">
+            <h2>Cards in <span id="current-collection-name">None</span></h2>
+
+             <button id="show-cards-btn" style="display: none;">Show Cards</button>
+             <button id="hide-cards-btn" style="display: none;">Hide Cards</button>
+
+             <ul id="card-list" style="display: none;">
+                 </ul>
+             <div id="card-list-placeholder" style="display: block;">
+                 <em>Select a collection to see options.</em>
+             </div>
+
+
+             <hr>
+             <h3>Add Card to Selected Collection</h3>
+             <input type="text" id="new-card-front" placeholder="Card Front">
+             <input type="text" id="new-card-back" placeholder="Card Back">
+             <button id="add-card-btn">Add Card</button>
+
+             <hr>
+             <h3>Review Area</h3>
+             <div id="review-card-display" class="card">
+                 <div id="review-front"></div>
+                 <div id="review-back" style="display: none;"></div>
+             </div>
+             <button id="review-start-btn">Start Review</button>
+             <button id="review-show-back-btn" style="display: none;">Show Back</button>
+             <button id="review-next-btn" style="display: none;">Next Card</button>
+        </div>
+    </div>
+
+    <div id="status-message"></div>
+
+    <script src="./renderer.js"></script>
+</body>
+</html>
